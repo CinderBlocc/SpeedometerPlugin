@@ -94,8 +94,9 @@ void Speedometer::Render(CanvasWrapper canvas)
 		Vector velocity = car.GetVelocity();
 		float speed = velocity.magnitude();
 		float speedPerc = speed/2300.f;
-		float supersonicIn = 2200.f/2300.f;
-		float supersonicOut = 2100.f/2300.f;
+		const float supersonicIn = 2200.f/2300.f;
+		const float supersonicOut = 2100.f/2300.f;
+		const float engineOut = 1410.f/2300.f;
 
 		if(speed >= 2200)
 			wasSuperSonic = true;
@@ -145,6 +146,10 @@ void Speedometer::Render(CanvasWrapper canvas)
 		int XposOut = startPosition.X + (float)boxSize.X * supersonicOut;
 		canvas.DrawLine(Vector2{XposIn, startPosition.Y}, Vector2{XposIn, startPosition.Y + (int)boxHeight}, 2.f);
 		canvas.DrawLine(Vector2{XposOut, startPosition.Y}, Vector2{XposOut, startPosition.Y + (int)boxHeight}, 2.f);
+
+		//draw engine threshold
+		int XposEngine = startPosition.X + (float)boxSize.X * engineOut;
+		canvas.DrawLine(Vector2{ XposEngine, startPosition.Y }, Vector2{ XposEngine, startPosition.Y + (int)boxHeight }, 2.f);
 
 		//draw supersonic buffer timer
 		//base color
